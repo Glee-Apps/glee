@@ -90,5 +90,15 @@ func GetProducts(user uint) []*Product {
 		return nil
 	}
 
+	for _, element := range products {
+		images := make([]Image, 0)
+		err := GetDB().Table("images").Where("product_id = ?", element.ID).Find(&images).Error
+		if err != nil {
+			fmt.Println(err)
+			return nil
+		}
+		element.Images = images
+	}
+
 	return products
 }

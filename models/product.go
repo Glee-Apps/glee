@@ -14,8 +14,13 @@ type Product struct {
 	Description string   `json:"description"`
 	Quantity    int      `json:"quantity"`
 	Cost        int      `json:"cost"`
-	Images      []string `json:"images"`
+	Images      []Image `json:"images"`
 	UserId      uint     `json:"user_id"` //The user that this contact belongs to
+}
+
+type Image struct {
+	gorm.Model
+	Url string
 }
 
 /*

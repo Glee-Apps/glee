@@ -65,6 +65,8 @@ func (product *Product) Create() map[string]interface{} {
 
 	GetDB().Create(product)
 
+	GetDB().Create(product.Images)
+
 	resp := u.Message(true, "success")
 	resp["product"] = product
 	return resp

@@ -75,7 +75,7 @@ func (account *Account) Create() map[string]interface{} {
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 	account.Token = tokenString
 
-	account.Password = "" //delete password
+	account.Password = "Can't show you this" //delete password
 
 	response := u.Message(true, "Account has been created")
 	response["account"] = account
@@ -98,7 +98,7 @@ func Login(email, password string) map[string]interface{} {
 		return u.Message(false, "Invalid login credentials. Please try again")
 	}
 	//Worked! Logged In
-	account.Password = ""
+	account.Password = "Can't show you this"
 
 	//Create JWT token
 	tk := &Token{UserId: account.ID}

@@ -8,28 +8,43 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Contact struct {
+type Product struct {
 	gorm.Model
-	Name   string `json:"name"`
-	Phone  string `json:"phone"`
-	UserId uint   `json:"user_id"` //The user that this contact belongs to
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Quantity    int      `json:"quantity"`
+	Cost        int      `json:"cost"`
+	Images      []string `json:"images"`
+	UserId      uint     `json:"user_id"` //The user that this contact belongs to
 }
 
 /*
  This struct function validate the required parameters sent through the http request body
 returns message and true if the requirement is met
 */
-func (contact *Contact) Validate() (map[string]interface{}, bool) {
+func (product *Product) Validate() (map[string]interface{}, bool) {
 
-	if contact.Name == "" {
-		return u.Message(false, "Contact name should be on the payload"), false
+	if product.Name == "" {
+		return u.Message(false, "Product name should be on the payload"), false
 	}
 
-	if contact.Phone == "" {
-		return u.Message(false, "Phone number should be on the payload"), false
+	if product.Description == "" {
+		return u.Message(false, "Description should be on the payload"), false
 	}
 
-	if contact.UserId <= 0 {
+	if product.Quantity == 0 {
+		return u.Message(false, "Quantity should be on the payload"), false
+	}
+
+	if product.Cost == 0 {
+		return u.Message(false, "Cost should be on the payload"), false
+	}
+
+	if product.Images == nil {
+		return u.Message(false, "Images should be on the payload"), false
+	}
+
+	if product.UserId <= 0 {
 		return u.Message(false, "User is not recognized"), false
 	}
 
@@ -37,22 +52,22 @@ func (contact *Contact) Validate() (map[string]interface{}, bool) {
 	return u.Message(true, "success"), true
 }
 
-func (contact *Contact) Create() map[string]interface{} {
+func (product *Product) Create() map[string]interface{} {
 
-	if resp, ok := contact.Validate(); !ok {
+	if resp, ok := product.Validate(); !ok {
 		return resp
 	}
 
-	GetDB().Create(contact)
+	GetDB().Create(product)
 
 	resp := u.Message(true, "success")
-	resp["contact"] = contact
+	resp["product"] = product
 	return resp
 }
 
-func GetContact(id uint) *Contact {
+func GetProduct(id uint) *Product {
 
-	contact := &Contact{}
+	contact := &Product{}
 	err := GetDB().Table("contacts").Where("id = ?", id).First(contact).Error
 	if err != nil {
 		return nil
@@ -60,9 +75,9 @@ func GetContact(id uint) *Contact {
 	return contact
 }
 
-func GetContacts(user uint) []*Contact {
+func GetProducts(user uint) []*Product {
 
-	contacts := make([]*Contact, 0)
+	contacts := make([]*Product, 0)
 	err := GetDB().Table("contacts").Where("user_id = ?", user).Find(&contacts).Error
 	if err != nil {
 		fmt.Println(err)

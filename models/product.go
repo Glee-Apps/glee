@@ -20,7 +20,8 @@ type Product struct {
 
 type Image struct {
 	gorm.Model
-	Url string `json:"url"`
+	ProductId uint   `json:"product_id"`
+	Url       string `json:"url"`
 }
 
 /*

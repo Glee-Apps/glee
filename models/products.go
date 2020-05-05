@@ -10,12 +10,13 @@ import (
 
 type Product struct {
 	gorm.Model
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Quantity    int     `json:"quantity"`
-	Cost        int     `json:"cost"`
-	Images      []Image `json:"images"`
-	UserId      uint    `json:"user_id"` //The user that this contact belongs to
+	Name              string  `json:"name"`
+	Description       string  `json:"description"`
+	Quantity          int     `json:"quantity"`
+	Cost              int     `json:"cost"`
+	Images            []Image `json:"images"`
+	UserId            uint    `json:"user_id"`
+	ProductCategoryId uint    `json:"category_id"`
 }
 
 type Image struct {

@@ -78,6 +78,15 @@ func GetProduct(id uint) *Product {
 	if err != nil {
 		return nil
 	}
+
+	images := make([]Image, 0)
+	err = GetDB().Table("images").Where("product_id = ?", product.ID).Find(&images).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	product.Images = images
+
 	return product
 }
 

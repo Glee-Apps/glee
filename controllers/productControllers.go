@@ -32,3 +32,25 @@ var GetProductFor = func(w http.ResponseWriter, r *http.Request) {
 	resp["data"] = data
 	u.Respond(w, resp)
 }
+
+var CreateProductCategory = func(w http.ResponseWriter, r *http.Request) {
+
+	productCategory := &models.ProductCategory{}
+
+	err := json.NewDecoder(r.Body).Decode(productCategory)
+	if err != nil {
+		u.Respond(w, u.Message(false, "Error while decoding request body"))
+		return
+	}
+
+	resp := productCategory.Create()
+	u.Respond(w, resp)
+}
+
+var GetProductCategories = func(w http.ResponseWriter, r *http.Request) {
+
+	data := models.GetProductCategories()
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}

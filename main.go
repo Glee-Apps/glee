@@ -18,6 +18,8 @@ func main() {
 	router.HandleFunc("/api/user/new", controllers.CreateAccount).Methods("POST")
 	router.HandleFunc("/api/user/login", controllers.Authenticate).Methods("POST")
 	router.HandleFunc("/api/products/new", controllers.CreateProduct).Methods("POST")
+	router.HandleFunc("/api/products/category/new", controllers.CreateProductCategory).Methods("POST")
+	router.HandleFunc("/api/products/category", controllers.GetProductCategories).Methods("GET")
 	router.HandleFunc("/api/me/products", controllers.GetProductFor).Methods("GET") //  user/2/contacts
 
 	router.Use(app.JwtAuthentication) //attach JWT auth middleware

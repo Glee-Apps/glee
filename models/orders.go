@@ -51,7 +51,7 @@ func (order *Order) Create() map[string]interface{} {
 	return resp
 }
 
-func (order *Order) Update(id int) map[string]interface{} {
+func (order *Order) Update(id string) map[string]interface{} {
 
 	if resp, ok := order.Validate(); !ok {
 		return resp

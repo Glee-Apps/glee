@@ -2,12 +2,10 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"net/http"
-	"strconv"
-
 	"github.com/Manuhmutua/glee/models"
 	u "github.com/Manuhmutua/glee/utils"
+	"github.com/gorilla/mux"
+	"net/http"
 )
 
 var CreateOrder = func(w http.ResponseWriter, r *http.Request) {
@@ -40,10 +38,8 @@ var UpdateOrder = func(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	orderId := vars["id"]
 
-	n, _ := strconv.Atoi(orderId)
-
 	order.UserId = user
-	resp := order.Update(n)
+	resp := order.Update(orderId)
 	u.Respond(w, resp)
 }
 

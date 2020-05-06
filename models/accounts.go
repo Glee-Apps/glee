@@ -120,5 +120,7 @@ func GetUser(u string) *Account {
 	}
 
 	acc.Password = "Can't show you this"
+	acc.Token = "Can't also show you this"
+
 	return acc
 }

@@ -10,9 +10,10 @@ import (
 
 type Order struct {
 	gorm.Model
-	Quantity  int  `json:"quantity"`
-	UserId    uint `json:"user_id"`
-	ProductId int  `json:"product_id"`
+	Quantity    int  `json:"quantity"`
+	UserId      uint `json:"user_id"`
+	ProductId   int  `json:"product_id"`
+	OrderStatus int  `json:"status_id"`
 }
 
 /*

@@ -57,14 +57,9 @@ func (order *Order) Update(id string) map[string]interface{} {
 		return resp
 	}
 
-	_order := &Order{}
 	err := GetDB().Table("orders").Where("id = ?", id).First(order).Error
 	if err != nil {
-		return nil
-	}
-
-	if _order.ID <= 0 {
-		return u.Message(false, "order does not exist")
+		return u.Message(false, err.Error())
 	}
 
 	GetDB().Model(order).Where("id = ?", id).Updates(order)

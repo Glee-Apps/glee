@@ -66,7 +66,7 @@ func (order *Order) Update(id int) map[string]interface{} {
 func GetOrder(id uint) *Order {
 
 	order := &Order{}
-	err := GetDB().Table("products").Where("id = ?", id).First(order).Error
+	err := GetDB().Table("orders").Where("id = ?", id).First(order).Error
 	if err != nil {
 		return nil
 	}
@@ -76,7 +76,7 @@ func GetOrder(id uint) *Order {
 func GetOrders(user uint) []*Order {
 
 	orders := make([]*Order, 0)
-	err := GetDB().Table("products").Where("user_id = ?", user).Find(&orders).Error
+	err := GetDB().Table("orders").Where("user_id = ?", user).Find(&orders).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil

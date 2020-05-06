@@ -111,7 +111,7 @@ func Login(email, password string) map[string]interface{} {
 	return resp
 }
 
-func GetUser(u uint) *Account {
+func GetUser(u string) *Account {
 
 	acc := &Account{}
 	GetDB().Table("accounts").Where("id = ?", u).First(acc)
@@ -119,6 +119,6 @@ func GetUser(u uint) *Account {
 		return nil
 	}
 
-	acc.Password = ""
+	acc.Password = "Can't show you this"
 	return acc
 }

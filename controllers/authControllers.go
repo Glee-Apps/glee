@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 
 	"github.com/Manuhmutua/glee/models"
@@ -31,5 +32,16 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := models.Login(account.Email, account.Password)
+	u.Respond(w, resp)
+}
+
+var GetUserById = func(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	data := models.GetUser(id)
+	resp := u.Message(true, "success")
+	resp["data"] = data
 	u.Respond(w, resp)
 }

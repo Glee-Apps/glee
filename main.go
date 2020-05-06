@@ -26,6 +26,7 @@ func main() {
 	router.HandleFunc("/api/me/orders", controllers.GetOrdersFor).Methods("GET")
 	router.HandleFunc("/api/orders/new/status", controllers.CreateOrderStatus).Methods("POST")
 	router.HandleFunc("/api/orders", controllers.GetOrderStatuses).Methods("GET")
+	router.HandleFunc("/api/user/{id}", controllers.GetUserById).Methods("GET")
 
 	router.Use(app.JwtAuthentication) //attach JWT auth middleware
 

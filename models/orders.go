@@ -57,7 +57,7 @@ func (order *Order) Update(id string) map[string]interface{} {
 		return resp
 	}
 
-	GetDB().Update(order).Where("id = ?", id)
+	GetDB().Model(order).Where("id = ?", id).Updates(order)
 
 	resp := u.Message(true, "success")
 	resp["order"] = order

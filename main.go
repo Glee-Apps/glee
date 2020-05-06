@@ -20,7 +20,12 @@ func main() {
 	router.HandleFunc("/api/products/new", controllers.CreateProduct).Methods("POST")
 	router.HandleFunc("/api/products/category/new", controllers.CreateProductCategory).Methods("POST")
 	router.HandleFunc("/api/products/category", controllers.GetProductCategories).Methods("GET")
-	router.HandleFunc("/api/me/products", controllers.GetProductFor).Methods("GET") //  user/2/contacts
+	router.HandleFunc("/api/me/products", controllers.GetProductFor).Methods("GET")
+	router.HandleFunc("/api/orders/new", controllers.CreateOrder).Methods("POST")
+	router.HandleFunc("/api/orders/update/{id}", controllers.UpdateOrder).Methods("POST")
+	router.HandleFunc("/api/me/orders", controllers.GetOrdersFor).Methods("GET")
+	router.HandleFunc("/api/orders/new/status", controllers.CreateOrderStatus).Methods("POST")
+	router.HandleFunc("/api/orders", controllers.GetOrderStatuses).Methods("GET")
 
 	router.Use(app.JwtAuthentication) //attach JWT auth middleware
 

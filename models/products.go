@@ -16,7 +16,7 @@ type Product struct {
 	Cost              int     `json:"cost"`
 	Images            []Image `json:"images"`
 	UserId            uint    `json:"user_id"`
-	ProductCategoryId uint    `json:"category_id"`
+	ProductCategoryId int     `json:"category_id"`
 }
 
 type Image struct {

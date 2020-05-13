@@ -30,6 +30,7 @@ func main() {
 
 	router.Use(app.JwtAuthentication) //attach JWT auth middleware
 
+	router.Use(app.NotFoundHandler)
 	//router.NotFoundHandler = app.NotFoundHandler
 
 	port := os.Getenv("PORT")
